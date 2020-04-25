@@ -55,6 +55,17 @@ router.post('/users/logoutAll', auth, async (request, response) =>{
 router.get('/users/me', auth, async (request, response)=>{
   response.send(request.user);
 })
+router.get('/users/:id', auth, async (request, response)=>{
+  const  _id = request.params.id;
+  try{
+    const user = await User.findOne({ _id });
+    if(!user) return response.status(404).send();
+    response.send(user);
+  } catch (error) {
+    response.status(500).send();
+  }
+})
+
 
 //Update User profile
 router.patch('/users/me', auth, async (request, response)=>{

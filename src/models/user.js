@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const Design = require('./designs');
+const Design = require('./design');
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -55,12 +55,12 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
+//user's reference to designs
 userSchema.virtual('designs', {
   ref: 'Design',
   localField: '_id',
   foreignField: 'owner'
 });
-
 
 //create user JSON
 userSchema.methods.toJSON = function(){
@@ -74,6 +74,7 @@ userSchema.methods.toJSON = function(){
   return userObject;
 }
 
+// generate authentication token for login
 userSchema.methods.generateAuthToken = async function(){
   const user = this;
   const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET);
@@ -82,6 +83,7 @@ userSchema.methods.generateAuthToken = async function(){
   return token;
 }
 
+//login authentication
 userSchema.statics.findByCredentials = async (email, password)=>{
   const user = await User.findOne({ email });
   if(!user) throw new Error('Unable to login');
@@ -91,6 +93,8 @@ userSchema.statics.findByCredentials = async (email, password)=>{
   return user;
 }
 
+
+//hash the plain text password
 userSchema.pre('save', async function(next){
   const user = this;
   if(user.isModified('password')) user.password = await bcrypt.hash(user.password, 8);
@@ -98,6 +102,7 @@ userSchema.pre('save', async function(next){
   next();
 })
 
+// Delete the user's designs when user deletes their account
 userSchema.pre('remove', async function(next){
   const user = this;
   await Design.deleteMany({owner: user._id})
