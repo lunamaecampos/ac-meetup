@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <h1>Queue App</h1>
+    <div id="queuebox"></div>
+    <div id="messages" class="chat__messages"></div>
+    <form id="message-form">
+        <input id="message" placeholder="Message" required autocomplete="off">
+        <button>Send</button>
+    </form>
+    <div id="messages" class="chat__messages"></div>
+    <script id="queue-template" type="text/html">
+      <h3>{{islandName}} - {{username}} - Native Fruit: {{nativeFruit}} - Turnips are {{turnipPrice}} bells</h3>
+      <h3>Entry fee: {{entryFee}} - {{hemisphere}} - {{islandTime}}</h3></h3>
+      <h3>{{visitorQueue.size}}/{{visitorQueue.maxQueuesize}} visitors in queue.</h3>
+      <h3>{{islandSize}} Max Visitors Allowed At A Time</h3>
+      <p>{{ villager}} is currenly visiting {{islandName}}</p>
+      <p>Extra details:</p>
+      <p>{{about}}</p>
+    </script>
+    <script id="message-template" type="text/html">
+      <p>
+        <span class="message__name">{{username}}</span>
+        <span class="message__meta">{{createdAt}}</span> -
+        <span>{{message}}</span>
+      </p>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/hosts.js"></script>
+  </body>
+</html>

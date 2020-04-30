@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <h1>Queue App Create Listing </h1>
+    <form action="/hosts.html">
+      <label>Dodo Code: </label>
+      <input type="text" name="dodoCode" placeholder="53MXZ"></input><br>
+      <label>Display name: </label>
+      <input type="text" name="username" placeholder="Display name" required><br>
+      <label>Island Name: </label>
+      <input type="text" name="islandName" placeholder="Island Name"></input><br>
+      <label>Native Fruit: </label>
+      <input type="text" name="nativeFruit" placeholder="Native Fruit"></input><br>
+      <label>Turnip Price: </label>
+      <input type="number" name="turnipPrice" placeholder="100"></input>Bells<br>
+      <label>Hemisphere: </label>
+      <input type="text" name="hemisphere" placeholder="North"></input><br>
+      <label>Visiting Villager: </label>
+      <input type="text" name="villager" placeholder="Celeste"></input><br>
+      <label>Island Time: </label>
+      <input type="datetime" name="islandTime" placeholder="Native Fruit"></input><br>
+      <label>Specific Details: </label>
+      <textarea name="about" placeholder="Specific Details Visitors should know about visiting your island" rows="8" cols="80"></textarea><br>
+      <label>Twitter Handle: </label>
+      <input type="text" name="twitter" placeholder="@twitteruser"></input> * Optional * <br>
+      <label>Discord: </label>
+      <input type="text" name="discord" placeholder="#discord123"></input> * Optional * <br>
+      <label>Twitch Handle: </label>
+      <input type="text" name="twitch" placeholder="@twitchuser"></input> * Optional * <br>
+      <label>Island Size: </label>
+      <input type="number" name="islandSize" placeholder="2"></input>Max 3 visitors on island at a time<br>
+      <label>Queue Size: </label>
+      <input type="number" name="queueSize" placeholder="20"></input>Max 40 visitors in Queue<br>
+      <label>Entry Fee: </label>
+      <input type="text" name="entryFee" placeholder=""></input>Bells? Nook Miles Tickets? Goods?<br>
+      <label>Private Listing: </label>
+      <input type="number" name="privateRoom" placeholder="true"></input><br>
+      <button>Submit</button>
+    </form>
+    <h1>Join Queue </h1>
+    <form action="/visitors.html">
+      <label>Username: </label>
+      <input type="text" name="username" placeholder="Display Name"></input><br>
+      <label>Host ID: </label>
+      <input type="text" name="hostID" placeholder="Display Name"></input><br>
+      <button>Submit</button>
+    </form>
+  </body>
+</html>
