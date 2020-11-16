@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
+    minLength: 3,
     required: true,
     trim: true
   },
@@ -29,13 +30,8 @@ const userSchema = new mongoose.Schema({
       if(value.toLowerCase().includes('password')) throw new Error('Password cannot contain "password"');
     }
   },
-  nsxid: {
+  switchID: {
     type: String,
-    trim: true
-  },
-  securityAnswer: {
-    type: String,
-    required: true,
     trim: true
   },
   karma: {
@@ -77,7 +73,17 @@ userSchema.methods.toJSON = function(){
 // generate authentication token for login
 userSchema.methods.generateAuthToken = async function(){
   const user = this;
-  const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET);
+  const token = jwt.sign(
+    {
+      _id: user._id.toString(),
+      username: user.username,
+      email: user.email,
+      switchID: user.switchID,
+      avatar: user.avatar,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '4h'}
+  );
   user.tokens = user.tokens.concat({token});
   await user.save();
   return token;

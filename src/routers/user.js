@@ -6,7 +6,7 @@ const router = new express.Router();
 const auth = require('../middleware/auth');
 
 // Create User
-router.post('/users', async(request, response)=>{
+router.post('/users/register', async(request, response)=>{
   const user = new User(request.body);
   try{
     await user.save();
@@ -69,8 +69,10 @@ router.get('/users/:id', auth, async (request, response)=>{
 
 //Update User profile
 router.patch('/users/me', auth, async (request, response)=>{
+  console.log('hello');
+  console.log(request.body);
   const updates = Object.keys(request.body);
-  const allowedUpdates = ['username', 'email', 'password', 'nsxid'];
+  const allowedUpdates = ['username', 'email', 'password', 'swutchID'];
   const isValidOperation = updates.every(
     (update)=> allowedUpdates.includes(update)
   );
@@ -80,7 +82,7 @@ router.patch('/users/me', auth, async (request, response)=>{
     updates.forEach((update)=> user[update] = request.body[update]);
     await user.save();
     if(!user) return response.status(404).send();
-    response.send(user);
+    response.send({ user });
   } catch (error) {
     response.status(400).send(error);
   }
