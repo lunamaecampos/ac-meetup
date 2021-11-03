@@ -25,7 +25,7 @@
     "request": "^2.88.0",
     "sharp": "^0.25.2",
     "socket.io": "^2.2.0",
-    "validator": "^13.0.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "env-cmd": "^8.0.2",
